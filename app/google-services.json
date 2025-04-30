@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "17932906674",
+    "firebase_url": "https://ssss-cb4aa-default-rtdb.firebaseio.com",
+    "project_id": "ssss-cb4aa",
+    "storage_bucket": "ssss-cb4aa.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:17932906674:android:ec67b2337d2c791a8159ab",
+        "android_client_info": {
+          "package_name": "com.example.mohaiminur.com.textchat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "17932906674-2lcgl0n7pm539c73u7efbvfav0r6mt8d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKnxTCaLn9-tyi7SXWfcx06TwpjDGkAww"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "17932906674-2lcgl0n7pm539c73u7efbvfav0r6mt8d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

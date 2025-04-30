@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".UsersFragment"
+    android:background="@color/bg_white">
+
+    <!-- User Profile Section -->
+    <RelativeLayout
+        android:layout_width="396dp"
+        android:layout_height="706dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/profile_bg"
+        android:paddingBottom="10dp">
+
+        <!-- User Image Container -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/userImgContainer"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="10dp"
+            android:elevation="10dp"
+            app:cardCornerRadius="50dp">
+
+            <ImageView
+                android:id="@+id/userImg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/profile" />
+        </androidx.cardview.widget.CardView>
+
+        <!-- Progress Indicator -->
+        <com.example.schat.ToolDotProgress
+            android:id="@+id/dots_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/userName"
+            android:layout_centerHorizontal="true"
+            android:elevation="10dp"
+            android:visibility="gone"
+            app:color="@color/teal_200"
+            app:count="3"
+            app:timeout="300" />
+
+        <!-- User Name EditText -->
+        <EditText
+            android:id="@+id/userName"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_below="@id/userImgContainer"
+            android:layout_centerHorizontal="true"
+            android:layout_marginVertical="5dp"
+            android:background="@drawable/edit_text_bg"
+            android:gravity="center"
+            android:hint="UserName"
+            android:minWidth="200dp"
+            android:textColor="@color/white"
+            android:textColorHint="#7F7193" />
+
+        <!-- About EditText -->
+        <EditText
+            android:id="@+id/userAbout"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_below="@id/userName"
+            android:layout_centerHorizontal="true"
+            android:layout_marginVertical="5dp"
+            android:background="@drawable/edit_text_bg"
+            android:gravity="center"
+            android:hint="About"
+            android:minWidth="200dp"
+            android:textColor="@color/bg_white"
+            android:textColorHint="#7F7193" />
+
+        <!-- Update Button -->
+        <Button
+            android:id="@+id/updateProf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/userAbout"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/bg_green"
+            android:text="Обновить"
+            android:textAllCaps="false" />
+
+    </RelativeLayout>
+
+    <!-- Settings Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/setting_btm_bg"
+        android:gravity="center"
+        android:visibility="gone"
+        android:padding="20dp"
+        android:orientation="vertical"
+        android:layout_marginHorizontal="10dp">
+
+        <!-- Account Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Account"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="15dp"
+            android:textColor="@color/bg"/>
+
+        <!-- Notifications Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Notifications"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="15dp"
+            android:textColor="@color/bg"/>
+
+        <!-- Privacy Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Privacy"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="15dp"
+            android:textColor="@color/bg"/>
+
+        <!-- Help Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Help"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/bg"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
