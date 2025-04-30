@@ -24,10 +24,19 @@ jobs:
       run: chmod +x gradlew
 
     - name: Build with Gradle
-      run: ./gradlew assembleDebug  # или assembleRelease для релизной сборки
+      run: ./gradlew build
 
-    - name: Upload APK to GitHub Actions
-      uses: actions/upload-artifact@v2  # Используем v2 для стабильности
+    - name: List files in build directory
+      run: ls -R app/build/outputs/apk/release
+
+    - name: Upload APK as artifact
+      uses: actions/upload-artifact@v4
       with:
-        name: app-apk
-        path: app/build/outputs/apk/debug/*.apk  # Путь к APK в режиме Debug
+        name: android-apk
+        path: app/build/outputs/apk/release/app-release.apk
+
+    - name: Deploy to Firebase (example)
+      uses: actions/upload-artifact@v4
+      with:
+        name: firebase-deployment
+        path: ./firebase-deploy-folder
