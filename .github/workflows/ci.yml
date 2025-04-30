@@ -24,10 +24,10 @@ jobs:
       run: chmod +x gradlew
 
     - name: Build with Gradle
-      run: ./gradlew assembleDebug
+      run: ./gradlew assembleDebug  # или assembleRelease для релизной сборки
 
-    - name: Upload APK
-      uses: actions/upload-artifact@v3
+    - name: Upload APK to GitHub Actions
+      uses: actions/upload-artifact@v2  # Используем v2 для стабильности
       with:
-        name: app-debug
-        path: app/build/outputs/apk/debug/*.apk
+        name: app-apk
+        path: app/build/outputs/apk/debug/*.apk  # Путь к APK в режиме Debug
