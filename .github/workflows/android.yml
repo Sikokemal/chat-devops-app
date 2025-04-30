@@ -1,42 +1,33 @@
-name: Android CI/CD
+name: Android CI
 
 on:
   push:
-    branches:
-      - main  # Запускать процесс при пуше в ветку main
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # Используем Ubuntu для сборки
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3  # Клонируем код из репозитория
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'  # Устанавливаем OpenJDK
-          java-version: '17'  # Указываем версию JDK
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '17'
 
-      - name: Set up Android SDK
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 30
-          target: google_apis
-          arch: x86_64
-          force-avd-creation: true
+    - name: Give gradlew permission to execute
+      run: chmod +x gradlew
 
-      - name: Give gradlew permission to execute
-        run: chmod +x gradlew  # Даем права на выполнение скрипта gradlew
+    - name: Build with Gradle
+      run: ./gradlew assembleDebug
 
-      - name: Build APK with Gradle
-        run: ./gradlew assembleRelease  # Собираем APK с помощью Gradle
-
-      - name: Upload APK to Firebase App Distribution
-        uses: wzieba/Firebase-Distribution-Github-Action@v1  # Используем GitHub Action для загрузки APK
-        with:
-          appId: ${{secrets.FIREBASE_APP_ID}}            # Твой ID приложения Firebase
-          token: ${{secrets.FIREBASE_AUTH_TOKEN}}         # Токен авторизации Firebase
-          groups: 'testers'                              # Группа тестировщиков
-          file: app/build/outputs/apk/release/app-release.apk  # Путь к собранному APK файлу
+    - name: Upload APK
+      uses: actions/upload-artifact@v3
+      with:
+        name: app-debug
+        path: app/build/outputs/apk/debug/*.apk
