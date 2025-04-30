@@ -31,7 +31,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -50,15 +49,7 @@ public class MainActivity extends AppCompatActivity implements HomeFragment.Home
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         isFirstLaunch=true;
-        FirebaseMessaging.getInstance().getToken()
-                .addOnCompleteListener(task -> {
-                    if (!task.isSuccessful()) {
-                        Log.w("FCM", "Ошибка получения токена", task.getException());
-                        return;
-                    }
-                    String token = task.getResult();
-                    Log.d("FCM", "FCM токен: " + token);
-                });
+
 
         bottomNavigationView=findViewById(R.id.btmNavigation);
         viewPager=findViewById(R.id.pager);

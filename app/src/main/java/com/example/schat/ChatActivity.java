@@ -33,7 +33,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Date;
-import com.google.firebase.messaging.FirebaseMessaging;
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -53,29 +52,7 @@ public class ChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-        FirebaseMessaging.getInstance().getToken()
-                .addOnCompleteListener(task -> {
-                    if (!task.isSuccessful()) {
-                        Log.e("FCM Token", "Ошибка получения токена", task.getException());
-                        return;
-                    }
-                    String token = task.getResult();
-                    Log.d("FCM Token", "Токен: " + token);
 
-                    FirebaseDatabase.getInstance().getReference("tokens")
-                            .child(FirebaseAuth.getInstance().getUid())
-                            .setValue(token)
-                            .addOnSuccessListener(aVoid -> Log.d("FCM Token", "Токен сохранен в БД"))
-                            .addOnFailureListener(e -> Log.e("FCM Token", "Ошибка сохранения токена", e));
-                });
-        FirebaseMessaging.getInstance().subscribeToTopic("allUsers")
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        Log.d("FCM", "Подписка на топик успешна!");
-                    } else {
-                        Log.e("FCM", "Ошибка подписки на топик", task.getException());
-                    }
-                });
 
         // Инициализация Firebase Storage
         StorageReference storageReference = FirebaseStorage.getInstance().getReference("images");
