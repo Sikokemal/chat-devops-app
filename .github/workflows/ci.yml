@@ -2,27 +2,23 @@ name: Android CI
 
 on:
   push:
-    branches:
-      - main  # или master, в зависимости от твоей ветки
+    branches: [ "main" ]
   pull_request:
-    branches:
-      - main  # или master
+    branches: [ "main" ]
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
-    - name: Set up JDK
+    - name: Set up JDK 11
       uses: actions/setup-java@v2
       with:
-        java-version: '11'  # или версия, которая используется в твоем проекте
+        distribution: 'temurin' # Это нужно было добавить
+        java-version: '11'
 
-    - name: Build the app
-      run: ./gradlew build  # для сборки приложения в Android Studio
-
-    - name: Run tests
-      run: ./gradlew test  # для выполнения тестов (если они есть в проекте)
+    - name: Build with Gradle
+      run: ./gradlew build
