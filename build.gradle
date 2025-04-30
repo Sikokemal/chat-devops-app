@@ -12,6 +12,7 @@ buildscript {
         // Add the dependency for the Google services Gradle plugin
         classpath 'com.google.gms:google-services:4.3.15'
         classpath 'com.android.tools.build:gradle:8.7.3'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.1'  // Убедитесь, что используете последнюю версию
 
 
     }
@@ -19,6 +20,7 @@ buildscript {
 
 
 plugins {
+
     id 'com.android.application' version '8.0.2' apply false
     id 'com.android.library' version '8.0.2' apply false
 }
