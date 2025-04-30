@@ -3,37 +3,47 @@ name: Android CI
 on:
   push:
     branches:
-      - main  # Выполнять на push в основную ветку
+      - main
   pull_request:
     branches:
-      - main  # Выполнять на pull request в основную ветку
+      - main
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # Используем последнюю версию Ubuntu для сборки
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3  # Проверка исходного кода из репозитория
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Set up JDK 11
-        uses: actions/setup-java@v3
-        with:
-          java-version: '11'  # Установить Java 11 для сборки Android проекта
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '17'
 
-      - name: Cache Gradle dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
+    - name: Give gradlew permission to execute
+      run: chmod +x gradlew
 
-      - name: Build with Gradle
-        run: ./gradlew build # Сборка проекта с помощью Gradle
+    - name: Build with Gradle
+      run: ./gradlew build
 
-      - name: Run lint checks
-        run: ./gradlew lintDebug # Запуск проверки кода с помощью lint
+    # Загрузка APK как артефакт для последующего использования
+    - name: Upload APK as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: android-apk
+        path: app/build/outputs/apk/release/app-release.apk
 
-      - name: Run tests
-        run: ./gradlew testDebugUnitTest # Запуск юнит-тестов
+    # Настройка Firebase CLI
+    - name: Set up Firebase CLI
+      run: |
+        echo "$FIREBASE_SERVICE_ACCOUNT_KEY" > firebase-service-account.json
+        firebase use --add
+
+    # Публикация APK в Firebase
+    - name: Upload APK to Firebase App Distribution
+      run: |
+        firebase appdistribution:distribute app/build/outputs/apk/release/app-release.apk --app YOUR_FIREBASE_APP_ID --groups "testers" --token "$FIREBASE_AUTH_TOKEN"
+      env:
+        FIREBASE_AUTH_TOKEN: ${{ secrets.FIREBASE_AUTH_TOKEN }}
