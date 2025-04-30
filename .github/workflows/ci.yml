@@ -2,11 +2,9 @@ name: Android CI
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   pull_request:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
   build:
@@ -28,22 +26,14 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
 
-    # Загрузка APK как артефакт для последующего использования
-    - name: Upload APK as artifact
-      uses: actions/upload-artifact@v3
+    # Загрузка APK как артефакт
+    - name: Upload APK build artifact
+      uses: actions/upload-artifact@v4.6.2
       with:
         name: android-apk
         path: app/build/outputs/apk/release/app-release.apk
-
-    # Настройка Firebase CLI
-    - name: Set up Firebase CLI
-      run: |
-        echo "$FIREBASE_SERVICE_ACCOUNT_KEY" > firebase-service-account.json
-        firebase use --add
-
-    # Публикация APK в Firebase
-    - name: Upload APK to Firebase App Distribution
-      run: |
-        firebase appdistribution:distribute app/build/outputs/apk/release/app-release.apk --app YOUR_FIREBASE_APP_ID --groups "testers" --token "$FIREBASE_AUTH_TOKEN"
-      env:
-        FIREBASE_AUTH_TOKEN: ${{ secrets.FIREBASE_AUTH_TOKEN }}
+        if-no-files-found: error   # Если файл не найден, пайплайн завершится ошибкой
+        retention-days: 30         # Артефакт будет храниться 30 дней
+        compression-level: 6       # Стандартный уровень сжатия (по умолчанию)
+        overwrite: true            # Если артефакт уже существует, он будет перезаписан
+        include-hidden-files: false # Не включать скрытые файлы
