@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".RegisterActivity"
-    android:background="@color/bg_1"
+    android:background="@color/white"
     android:padding="20dp">
 
     <ImageView
@@ -24,16 +24,16 @@
         style="@style/LoginTextInputLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:placeholderText="Enter Email"
-        android:hint="Enter Email"
-        android:textColorHint="@color/white"
-        app:hintTextColor="@color/white"
-        app:placeholderTextColor="@color/white">
+        app:placeholderText="Введите Email"
+        android:hint="Введите Email"
+        android:textColorHint="@color/black"
+        app:hintTextColor="@color/black"
+        app:placeholderTextColor="@color/black">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/userName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:inputType="textEmailAddress"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -43,17 +43,17 @@
         style="@style/LoginTextInputLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:placeholderText="Enter Password"
-        android:textColorHint="@color/white"
-        app:hintTextColor="@color/white"
-        app:placeholderTextColor="@color/white"
+        app:placeholderText="Введите пароль"
+        android:textColorHint="@color/black"
+        app:hintTextColor="@color/black"
+        app:placeholderTextColor="@color/black"
         android:layout_marginTop="20dp"
         app:passwordToggleEnabled="true">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/userPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Password"
+            android:hint="Введите пароль"
             android:textColor="@color/white"
             android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -65,7 +65,7 @@
         android:layout_marginTop="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login"
+        android:text="Войти"
         android:backgroundTint="@color/bg"
         android:textColor="@color/bg_white"/>
 
@@ -76,8 +76,8 @@
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Not a User ? Register Here"
-        android:textColor="@color/bg_white"/>
+        android:text="Зарегистрируйтесь здесь"
+        android:textColor="@color/black"/>
 
 
 </RelativeLayout>
